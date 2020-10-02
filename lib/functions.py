@@ -1,5 +1,6 @@
 import re
 
+import numpy
 import numpy as np
 import numpy.random as npr
 
@@ -104,3 +105,81 @@ def gen_float16() -> float:
     maxi = 32767
     f = (maxi - mini) * npr.random() + mini
     return np.float16(np.around(f))
+
+
+def float_from_unsigned16(src: str, base_src: int) -> float:
+    n = int(src, base_src)
+    assert 0 <= n < 2 ** 16
+    sign = n >> 15
+    exp = (n >> 10) & 0b011111
+    fraction = n & (2 ** 10 - 1)
+    if exp == 0:
+        if fraction == 0:
+            return -0.0 if sign else 0.0
+        else:
+            return (-1) ** sign * fraction / 2 ** 10 * 2 ** (-14)  # subnormal
+    elif exp == 0b11111:
+        if fraction == 0:
+            return float("-inf") if sign else float("inf")
+        else:
+            return float("nan")
+    else:
+        return (-1) ** sign * (1 + fraction / 2 ** 10) * 2 ** (exp - 15)
+
+
+def parity(bits, power):
+    par = 0
+    for i in range(len(bits)):
+        if bits[i] != 2:
+            # si la case ne contient pas 2, on récupère l’index en binaire
+            s = np.binary_repr(i + 1)
+            x = int((int(s) / 10 ** power) % 10)
+            if x == 1 and bits[i] == 1:
+                par = int((par + 1) % 2)
+    return par
+
+
+def generate_code(msg):
+    i = 0
+    par = 0
+    while i < len(msg):  # recherche nb bits à ajouter
+        if 2 ** par == i + par + 1:
+            par += 1
+        else:
+            i += 1
+    bits = np.zeros(len(msg) + par, dtype=int)  # tableau de Hamming
+    i, j, k = 1, 0, 0
+    while i <= len(bits):
+        if 2 ** j == i:
+            bits[i - 1] = 2  # remplissage des inconnus
+            j += 1
+        else:
+            bits[k + j] = msg[k]
+            k += 1
+        i += 1
+    i = 0
+    while i < par:
+        bits[2 ** i - 1] = parity(bits, i)
+        i += 1
+    return bits
+
+
+def compute_crc(dividend, divisor):
+    def divide(d,r):
+        curr = 0
+        while not (len(r) - curr < len(d)):
+            for i in range(len(d)):
+                r[curr+i] = np.bitwise_xor(r[curr+i],d[i])
+            while r[curr] ==0 and curr != len(r):
+                curr+=1
+        return r
+
+    divis = [int(i) for i in divisor]
+    #calcul
+    div = [int(i) for i in dividend]
+    for i in range(len(divis)):
+        div.append(0)
+    rem = list(div)
+    rem = divide(divis,rem)
+    crc = np.bitwise_xor(div,rem)
+    return ''.join(str(i) for i in crc)
