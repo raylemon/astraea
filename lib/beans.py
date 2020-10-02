@@ -91,7 +91,7 @@ class Ca2:
     def __init__(self, number: int = None, base_src: int = None, base_dst: int = None):
         self.base_src = choose_bin_base() if base_src is None else base_src
         self.base_dst = choose_bin_base() if base_dst is None else base_dst
-        self.number = format_value(npr.randint(info8.min, info8.max), base_src) if number is None else number
+        self.number = format_value(npr.randint(info8.min, info8.max), self.base_src) if number is None else number
 
     @property
     def statement(self) -> str:

@@ -18,6 +18,7 @@ def menu():
 
 
 def show_exercise(mode):
+    exercise = None
     s_key = ''
     while s_key != 'Q':
         if mode == '1':
