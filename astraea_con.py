@@ -76,7 +76,7 @@ def show_exercise(mode):
                     Pensez à préfixer votre réponse par b, 0, 0x
             """)
 
-            exercise = CrcMessage()
+            exercise = Crc()
         elif mode == '7':
             print("""
                     Encodage de Hamming
