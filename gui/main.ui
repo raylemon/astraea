@@ -96,15 +96,22 @@
      <addaction name="action_DecFloat"/>
      <addaction name="action_FloatDec"/>
     </widget>
+    <widget class="QMenu" name="menuHamming">
+     <property name="title">
+      <string>Hamming</string>
+     </property>
+     <addaction name="action_HamEnc"/>
+     <addaction name="action_HamDec"/>
+    </widget>
     <addaction name="menuConversions"/>
     <addaction name="separator"/>
     <addaction name="menuArith"/>
     <addaction name="separator"/>
     <addaction name="menuFlottants"/>
     <addaction name="separator"/>
-    <addaction name="action_CRC"/>
+    <addaction name="actionCRC"/>
     <addaction name="separator"/>
-    <addaction name="action_Hamming"/>
+    <addaction name="menuHamming"/>
     <addaction name="separator"/>
     <addaction name="action_Quitter"/>
    </widget>
@@ -117,11 +124,6 @@
    <addaction name="menuExercices"/>
    <addaction name="menu_propos"/>
   </widget>
-  <action name="action_CRC">
-   <property name="text">
-    <string>CRC</string>
-   </property>
-  </action>
   <action name="action_About">
    <property name="text">
     <string>À propos d’Astraea</string>
@@ -167,14 +169,24 @@
     <string>Flottant 16 bits -&gt; Décimal</string>
    </property>
   </action>
-  <action name="action_Hamming">
-   <property name="text">
-    <string>Hamming</string>
-   </property>
-  </action>
   <action name="action_Quitter">
    <property name="text">
     <string>Quitter</string>
+   </property>
+  </action>
+  <action name="action_HamEnc">
+   <property name="text">
+    <string>Encodage</string>
+   </property>
+  </action>
+  <action name="action_HamDec">
+   <property name="text">
+    <string>Décodage</string>
+   </property>
+  </action>
+  <action name="actionCRC">
+   <property name="text">
+    <string>CRC</string>
    </property>
   </action>
  </widget>
@@ -233,22 +245,6 @@
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>do_arith_td()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_CRC</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>do_crc()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -357,22 +353,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>action_Hamming</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>do_hamming()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>pushButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
@@ -388,6 +368,54 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_HamDec</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_hamming_decode()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_HamEnc</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_hamming_encode()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCRC</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_crc()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>do_convert_bin()</slot>
@@ -398,9 +426,10 @@
   <slot>do_arith_td()</slot>
   <slot>do_decfloat()</slot>
   <slot>do_floatdec()</slot>
-  <slot>do_crc()</slot>
-  <slot>do_hamming()</slot>
   <slot>do_show_about()</slot>
   <slot>do_regen()</slot>
+  <slot>do_crc()</slot>
+  <slot>do_hamming_encode()</slot>
+  <slot>do_hamming_decode()</slot>
  </slots>
 </ui>
