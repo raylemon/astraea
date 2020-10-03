@@ -10,7 +10,7 @@ class Convert:
 
     @property
     def statement(self) -> str:
-        return f"{self.number} = {self.base_dst}"
+        return f"{self.number} = ? ({self.base_dst})"
 
     @property
     def solution(self) -> str:

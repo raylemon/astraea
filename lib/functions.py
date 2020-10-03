@@ -31,7 +31,7 @@ def format_message(msg: str, base: int) -> str:
     if base == 2:
         return f"b{v}"
     elif base == 8:
-        return f"O{v}"
+        return f"0{v}"
     elif base == 16:
         return f"0x{v}"
     else:

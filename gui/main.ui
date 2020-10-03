@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Astraea</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../astraea.ico</normaloff>../astraea.ico</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="lbl_enonce">
+        <property name="text">
+         <string>Énoncé général</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Régénérer</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QListWidget" name="listWidget">
+      <property name="movement">
+       <enum>QListView::Free</enum>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuExercices">
+    <property name="title">
+     <string>Exercices</string>
+    </property>
+    <widget class="QMenu" name="menuConversions">
+     <property name="title">
+      <string>Conversions</string>
+     </property>
+     <addaction name="action_ConvertBin"/>
+     <addaction name="action_ConvertDecBin"/>
+     <addaction name="action_ConvertEso"/>
+    </widget>
+    <widget class="QMenu" name="menuArith">
+     <property name="title">
+      <string>Arithmétique Binaire</string>
+     </property>
+     <addaction name="action_Ca2"/>
+     <addaction name="action_ArithPM"/>
+     <addaction name="action_ArithTD"/>
+    </widget>
+    <widget class="QMenu" name="menuFlottants">
+     <property name="title">
+      <string>Flottants</string>
+     </property>
+     <addaction name="action_DecFloat"/>
+     <addaction name="action_FloatDec"/>
+    </widget>
+    <addaction name="menuConversions"/>
+    <addaction name="separator"/>
+    <addaction name="menuArith"/>
+    <addaction name="separator"/>
+    <addaction name="menuFlottants"/>
+    <addaction name="separator"/>
+    <addaction name="action_CRC"/>
+    <addaction name="separator"/>
+    <addaction name="action_Hamming"/>
+    <addaction name="separator"/>
+    <addaction name="action_Quitter"/>
+   </widget>
+   <widget class="QMenu" name="menu_propos">
+    <property name="title">
+     <string>À propos</string>
+    </property>
+    <addaction name="action_About"/>
+   </widget>
+   <addaction name="menuExercices"/>
+   <addaction name="menu_propos"/>
+  </widget>
+  <action name="action_CRC">
+   <property name="text">
+    <string>CRC</string>
+   </property>
+  </action>
+  <action name="action_About">
+   <property name="text">
+    <string>À propos d’Astraea</string>
+   </property>
+  </action>
+  <action name="action_ConvertBin">
+   <property name="text">
+    <string>Conversions 2 &lt;-&gt; 8, 16</string>
+   </property>
+  </action>
+  <action name="action_ConvertDecBin">
+   <property name="text">
+    <string>Conversions 10 &lt;-&gt; 2,8,16</string>
+   </property>
+  </action>
+  <action name="action_ConvertEso">
+   <property name="text">
+    <string>Conversions toutes bases</string>
+   </property>
+  </action>
+  <action name="action_Ca2">
+   <property name="text">
+    <string>Compléments à 2 (Cà2)</string>
+   </property>
+  </action>
+  <action name="action_ArithPM">
+   <property name="text">
+    <string>Arithmétique (+,-)</string>
+   </property>
+  </action>
+  <action name="action_ArithTD">
+   <property name="text">
+    <string>Arithmétique (×,÷)</string>
+   </property>
+  </action>
+  <action name="action_DecFloat">
+   <property name="text">
+    <string>Décimal -&gt; Flottant 16 bits</string>
+   </property>
+  </action>
+  <action name="action_FloatDec">
+   <property name="text">
+    <string>Flottant 16 bits -&gt; Décimal</string>
+   </property>
+  </action>
+  <action name="action_Hamming">
+   <property name="text">
+    <string>Hamming</string>
+   </property>
+  </action>
+  <action name="action_Quitter">
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>action_About</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_show_about()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Quitter</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_ArithPM</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_arith_pm()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_ArithTD</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_arith_td()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_CRC</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_crc()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Ca2</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_arith_ca2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_ConvertBin</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_convert_bin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_ConvertDecBin</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_convert_decbin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_ConvertEso</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_convert_eso()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_DecFloat</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_decfloat()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_FloatDec</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_floatdec()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Hamming</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_hamming()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>do_regen()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>737</x>
+     <y>46</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>795</x>
+     <y>70</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>do_convert_bin()</slot>
+  <slot>do_convert_decbin()</slot>
+  <slot>do_convert_eso()</slot>
+  <slot>do_arith_pm()</slot>
+  <slot>do_arith_ca2()</slot>
+  <slot>do_arith_td()</slot>
+  <slot>do_decfloat()</slot>
+  <slot>do_floatdec()</slot>
+  <slot>do_crc()</slot>
+  <slot>do_hamming()</slot>
+  <slot>do_show_about()</slot>
+  <slot>do_regen()</slot>
+ </slots>
+</ui>
