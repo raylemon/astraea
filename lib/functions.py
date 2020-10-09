@@ -165,21 +165,21 @@ def generate_code(msg):
 
 
 def compute_crc(dividend, divisor):
-    def divide(d,r):
+    def divide(d, r):
         curr = 0
         while not (len(r) - curr < len(d)):
             for i in range(len(d)):
-                r[curr+i] = np.bitwise_xor(r[curr+i],d[i])
-            while r[curr] ==0 and curr != len(r):
-                curr+=1
+                r[curr + i] = np.bitwise_xor(r[curr + i], d[i])
+            while r[curr] == 0 and curr != len(r):
+                curr += 1
         return r
 
     divis = [int(i) for i in divisor]
-    #calcul
+    # calcul
     div = [int(i) for i in dividend]
     for i in range(len(divis)):
         div.append(0)
     rem = list(div)
-    rem = divide(divis,rem)
-    crc = np.bitwise_xor(div,rem)
+    rem = divide(divis, rem)
+    crc = np.bitwise_xor(div, rem)
     return ''.join(str(i) for i in crc)

@@ -51,24 +51,34 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
         self.lbl_enonce = QLabel(self.centralwidget)
         self.lbl_enonce.setObjectName(u"lbl_enonce")
 
-        self.horizontalLayout.addWidget(self.lbl_enonce)
+        self.gridLayout.addWidget(self.lbl_enonce, 1, 0, 1, 1)
 
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout.addItem(self.horizontalSpacer)
+        self.gridLayout.addItem(self.horizontalSpacer, 1, 1, 1, 1)
 
         self.pushButton = QPushButton(self.centralwidget)
         self.pushButton.setObjectName(u"pushButton")
 
-        self.horizontalLayout.addWidget(self.pushButton)
+        self.gridLayout.addWidget(self.pushButton, 1, 2, 1, 1)
+
+        self.lbl_title = QLabel(self.centralwidget)
+        self.lbl_title.setObjectName(u"lbl_title")
+        font = QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.lbl_title.setFont(font)
+
+        self.gridLayout.addWidget(self.lbl_title, 0, 0, 1, 3)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.verticalLayout.addLayout(self.gridLayout)
 
         self.listWidget = QListWidget(self.centralwidget)
         self.listWidget.setObjectName(u"listWidget")
@@ -158,6 +168,7 @@ class Ui_MainWindow(object):
         self.actionCRC.setText(QCoreApplication.translate("MainWindow", u"CRC", None))
         self.lbl_enonce.setText(QCoreApplication.translate("MainWindow", u"\u00c9nonc\u00e9 g\u00e9n\u00e9ral", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"R\u00e9g\u00e9n\u00e9rer", None))
+        self.lbl_title.setText(QCoreApplication.translate("MainWindow", u"Titre", None))
         self.menuExercices.setTitle(QCoreApplication.translate("MainWindow", u"Exercices", None))
         self.menuConversions.setTitle(QCoreApplication.translate("MainWindow", u"Conversions", None))
         self.menuArith.setTitle(QCoreApplication.translate("MainWindow", u"Arithm\u00e9tique Binaire", None))

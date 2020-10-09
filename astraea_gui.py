@@ -3,7 +3,7 @@ from enum import Enum
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QListWidgetItem
 
-from gui.lines import QBean
+from gui.lines import QLine, QFLine, QCLine,QHLine
 from gui.ui_main import Ui_MainWindow
 from lib.beans import *
 
@@ -33,47 +33,67 @@ class Gui(QMainWindow, Ui_MainWindow):
         pass
 
     def do_arith_pm(self):
-        pass
+        title= "Arithmétique: Additions et Soustraction"
+        enonce = "Pensez à préfixer votre réponse par b, 0, 0x !\nIndiquez votre réponse sur 8 bits (b.... ....) si elle est en binaire. "
+        self.select(Types.AR_PM,title, enonce)
 
     def do_arith_td(self):
-        pass
+        title = "Arithmétique: Multiplications et Divisions"
+        enonce = "Pensez à préfixer votre réponse par b, 0, 0x !\nIndiquez votre réponse sur 8 bits (b.... ....) si elle est en binaire. "
+        self.select(Types.AR_TD, title,enonce)
 
     def do_crc(self):
-        pass
+        title = "Encodage et Décodage de CRC"
+        enonce = "Encodez ou Décodez le CRC. Pensez à préfixer votre réponse par b, 0, 0x !\nIndiquez votre réponse sur 8 bits (b.... ....) si elle est en binaire. "
+        self.select(Types.CRC, title,enonce)
 
     def do_hamming_decode(self):
-        pass
+        title = "Décodage de Hamming"
+        enonce = "Décodez le message de Hamming"
+        self.select(Types.HAM_DEC, title,enonce)
 
     def do_hamming_encode(self):
-        pass
+        title = "Encodage de Hamming"
+        enonce = "Encodez le message de Hamming et notez le message encodé. Pensez à préfixer votre réponse par b, 0, 0x !\nIndiquez votre réponse sur 8 bits (b.... ....) si elle est en binaire. "
+        self.select(Types.HAM_ENC, title,enonce)
 
     def do_arith_ca2(self):
-        pass
+        title = "Compléments à 2"
+        enonce = "Calculez le complément à 2. Pensez à préfixer votre réponse par b, 0, 0x !\nIndiquez votre réponse sur 8 bits (b.... ....) si elle est en binaire. "
+        self.select(Types.AR_CA2, title, enonce)
 
     def do_convert_bin(self):
-        enonce = "Conversions 2<->8,16\nPensez à préfixer votre réponse par b, 0, 0x !\nIndiquez votre réponse sur 8 " \
+        title = "Conversions 2<->8,16"
+        enonce = "Pensez à préfixer votre réponse par b, 0, 0x !\nIndiquez votre réponse sur 8 " \
                  "bits (b.... ....) si elle est en binaire. "
-        self.select(Types.CONV2,enonce)
+        self.select(Types.CONV2,title, enonce)
 
     def do_convert_decbin(self):
-        enonce = "Conversion 10 <-> 2,8,16\nPensez à préfixer votre réponse par b, 0, 0x !\nIndiquez votre réponse " \
+        title = "Conversion 10 <-> 2,8,16"
+        enonce = "Pensez à préfixer votre réponse par b, 0, 0x !\nIndiquez votre réponse " \
                  "sur 8 bits (b.... ....) si elle est en binaire. "
-        self.select(Types.CONV10,enonce)
+        self.select(Types.CONV10, title, enonce)
 
     def do_convert_eso(self):
-        enonce = "Conversions toutes bases\nPensez à préfixer votre réponse par b, 0, 0x pour les bases " \
+        title= "Conversions toutes bases"
+        enonce = "Pensez à préfixer votre réponse par b, 0, 0x pour les bases " \
                  "binaires\nPensez à suffixer votre réponse par () pour les autres bases\nIndiquez votre réponse sur " \
                  "8 bits (b.... ....) si elle est en binaire "
-        self.select(Types.CONVESO,enonce)
+        self.select(Types.CONVESO, title,enonce)
 
     def do_decfloat(self):
-        pass
+        title = "Conversion Décimal en Float16"
+        enonce = "Convertissez le nombre décimal en flottant 16 bits"
+        self.select(Types.DEC_FLOAT, title,enonce)
 
     def do_floatdec(self):
-        pass
+        title = "Conversion Float16 en Décimal"
+        enonce = "Convertissez le nombre flottant en décimal"
+        self.select(Types.FLOAT_DEC,title, enonce)
 
-    def select(self,typ:Types,enonce:str):
+    def select(self, typ: Types, title:str,enonce: str):
         self.listWidget.clear()
+        self.lbl_title.setText(title)
         self.beanType = typ
         self.lbl_enonce.setText(enonce)
         self.do_regen()
@@ -87,37 +107,77 @@ class Gui(QMainWindow, Ui_MainWindow):
                 while bd == bs:
                     bd = choose_bin_base()
                 beans.append(Convert(base_src=bs, base_dst=bd))
+
             elif self.beanType == Types.CONV10:
                 bs = get_base()
                 bd = get_base()
                 while bd == bs:
                     bd = get_base()
-                beans.append(Convert(base_src=bs,base_dst=bd))
+                beans.append(Convert(base_src=bs, base_dst=bd))
+
             elif self.beanType == Types.CONVESO:
                 beans.append(Convert())
+
             elif self.beanType == Types.AR_CA2:
-                pass
+                bs = choose_bin_base()
+                bd = choose_bin_base()
+                while bd == bs:
+                    bd = choose_bin_base()
+                beans.append(Ca2(base_src=bs, base_dst=bd))
+
             elif self.beanType == Types.AR_PM:
-                pass
+                bs1 = choose_bin_base()
+                bs2 = choose_bin_base()
+                bd = choose_bin_base()
+                beans.append(Arith(base_src1=bs1, base_src2=bs2, base_dst=bd, op=npr.choice(('+', '-'))))
+
             elif self.beanType == Types.AR_TD:
-                pass
+                bs1 = choose_bin_base()
+                bs2 = choose_bin_base()
+                bd = choose_bin_base()
+                beans.append(Arith(base_src1=bs1, base_src2=bs2, base_dst=bd, op=npr.choice(('×', '÷'))))
+
             elif self.beanType == Types.DEC_FLOAT:
-                pass
+                beans.append(DecimalToFloat16(base_dst=choose_bin_base()))
+
             elif self.beanType == Types.FLOAT_DEC:
-                pass
+                beans.append(Float16ToDecimal(base_src=choose_bin_base()))
+
             elif self.beanType == Types.CRC:
-                pass
+                bs = choose_bin_base()
+                bd = choose_bin_base()
+                while bs == bd:
+                    bd = choose_bin_base()
+                beans.append(Crc(base_src=bs, base_dst=bd))
+
             elif self.beanType == Types.HAM_ENC:
-                pass
+                bs = choose_bin_base()
+                bd = choose_bin_base()
+                while bs == bd:
+                    bd = choose_bin_base()
+                beans.append(HammingMessage(base_src=bs, base_dst=bd, encoded=True))
+
             elif self.beanType == Types.HAM_DEC:
-                pass
+                bs = choose_bin_base()
+                bd = choose_bin_base()
+                while bs == bd:
+                    bd = choose_bin_base()
+                beans.append(HammingMessage(base_src=bs, base_dst=bd, encoded=False))
+
             else:
                 pass
         self.append_to_list(beans)
 
     def append_to_list(self, beans: list):
         for bean in beans:
-            line = QBean(bean)
+            if self.beanType == Types.FLOAT_DEC:
+                line = QFLine(bean)
+            elif self.beanType == Types.HAM_DEC:
+                line = QHLine(bean)
+            elif self.beanType == Types.CRC:
+                line = QCLine(bean)
+            else:
+                line = QLine(bean)
             item = QListWidgetItem(self.listWidget)
             item.setSizeHint(line.minimumSizeHint())
             self.listWidget.addItem(item)

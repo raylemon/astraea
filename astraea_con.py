@@ -8,13 +8,14 @@ def menu():
         1.  Conversions 10 -> Bases binaires    (1 octet non signé)
         2.  Conversions toutes bases            (1 octet non signé)
         3.  Compléments à 2 (Cà2)               (1 octet)
-        4.  Décimal -> Flottant                 (2 octets)
-        5.  Flottant -> Décimal                 (2 octets)
-        6.  Encodage / Décodage de CRC
-        7.  Encodage de Hamming
-        8.  Décodage de Hamming
+        4.  Arithmétique                        (1 octet)
+        5.  Décimal -> Flottant                 (2 octets)
+        6.  Flottant -> Décimal                 (2 octets)
+        7.  Encodage / Décodage de CRC
+        8.  Encodage de Hamming
+        9.  Décodage de Hamming
         Q.  Quitter l'application
-    """)
+    """.center(80))
 
 
 def show_exercise(mode):
@@ -27,7 +28,7 @@ def show_exercise(mode):
 
                     Pensez à préfixer votre réponse par b, 0, 0x !
                     Indiquez votre réponse sur 8 bits (b.... ....) si elle est en binaire.
-                    """)
+                    """.center(80))
             exercise = Convert(base_src=10, base_dst=choose_bin_base())
         elif mode == '2':
             print("""
@@ -36,18 +37,28 @@ def show_exercise(mode):
                     Pensez à préfixer votre réponse par b, 0, 0x pour les bases binaires
                     Pensez à suffixer votre réponse par () pour les autres bases
                     Indiquez votre réponse sur 8 bits (b.... ....) si elle est en binaire
-                    """)
+                    """.center(80))
 
             exercise = Convert()
         elif mode == '3':
             print("""
                     Complément à 2
+                    
                     Pensez à préfixer votre réponse par b, 0, 0x pour les bases binaires
                     Indiquez votre réponse sur 8 bits (b.... ....) si elle est en binaire
-                    """)
+                    """.center(80))
 
             exercise = Ca2()
         elif mode == '4':
+            print("""
+            Arithmétique (4 opérations)
+            
+            Pensez à préfixer votre réponse par b, 0, 0x pour les bases binaires
+            Indiquez votre réponse sur 8 bits (b.... ....) si elle est en binaire.
+            Indiquez OVF en cas d’overflow ou IMP en cas d’impossibilité.       
+                    """.center(80))
+            exercise = Arith()
+        elif mode == '5':
             print("""
                 Conversions Décimal vers Flottants 16 bits
 
@@ -55,10 +66,10 @@ def show_exercise(mode):
                 Indiquez votre réponse sur 16 bits: 1 bit de signe, 5 bits d'exposants, 10 bits de mantisse
 
                 Astraea ne gère pas (encore) la génération des cas particuliers.
-            """)
+            """.center(80))
 
             exercise = DecimalToFloat16()
-        elif mode == '5':
+        elif mode == '6':
             print("""
                     Conversions Flottants 16 bits vers Décimal
 
@@ -67,34 +78,34 @@ def show_exercise(mode):
                     ±(2^x+2^(x-1)+…)
 
                     Astraea ne gère pas (encore) la génération des cas particuliers.
-            """)
+            """.center(80))
 
             exercise = Float16ToDecimal()
-        elif mode == '6':
+        elif mode == '7':
             print("""
                     CRC
 
                     Pensez à préfixer votre réponse par b, 0, 0x
-            """)
+            """.center(80))
 
             exercise = Crc()
-        elif mode == '7':
-            print("""
-                    Encodage de Hamming
-
-                    Pensez à préfixer votre réponse par b, 0, 0x
-            """)
-            exercise = HammingMessage(encoded=True)
         elif mode == '8':
             print("""
-                            Encodage de Hamming
+                Encodage de Hamming
 
-                            Pensez à préfixer votre réponse par b, 0, 0x
-                            """)
+                Pensez à préfixer votre réponse par b, 0, 0x
+        """.center(80))
+            exercise = HammingMessage(encoded=True)
+        elif mode == '9':
+            print("""
+                Décodage de Hamming
+
+                Pensez à préfixer votre réponse par b, 0, 0x
+                """.center(80))
 
             exercise = HammingMessage(encoded=False)
         print(exercise.statement)
-        sol = input("Votre réponse ?")
+        sol = input("Votre réponse ?")
         if isinstance(exercise, Float16ToDecimal):
             if sol == exercise.solution or sol == exercise.polynom:
                 print("Bonne réponse !")
@@ -114,7 +125,7 @@ def show_exercise(mode):
                                                                                                     exercise.error_pos))
             else:
                 print("Désolé, la bonne réponse était : " + exercise.solution)
-        s_key = input("\nTaper Q pour revenir au menu, ou une autre touche pour afficher un nouvel exercice").upper()
+        s_key = input("\nTaper Q pour revenir au menu, ou une autre touche pour afficher un nouvel exercice: ").upper()
     menu()
 
 

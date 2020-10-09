@@ -278,3 +278,8 @@ class Crc:
         r = compute_crc(self.bin_msg, div)[len(self.bin_msg) + 1:]
         v = np.base_repr(int(r, 2), self.base_dst)
         return format_message(v, self.base_dst)
+
+    @property
+    def crc(self) -> str:
+        div = np.binary_repr(int(clear_string(self.div), 2))
+        return format_message(compute_crc(self.bin_msg, div)[len(self.bin_msg) + 1:], 2)
