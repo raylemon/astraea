@@ -6,25 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>351</width>
-    <height>112</height>
+    <width>396</width>
+    <height>93</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="1" colspan="3">
-    <widget class="QLineEdit" name="le_statement">
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_3">
      <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Solution</string>
+      <string>Polynôme</string>
      </property>
     </widget>
    </item>
@@ -38,6 +31,37 @@
      </property>
     </widget>
    </item>
+   <item row="0" column="1" colspan="3">
+    <widget class="QLineEdit" name="le_statement">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" colspan="2">
+    <widget class="QLineEdit" name="le_corr_poly">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Solution</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="le_polynom"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Correction</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
@@ -45,15 +69,19 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Polynôme</string>
+   <item row="2" column="3">
+    <widget class="QLineEdit" name="le_correction">
+     <property name="enabled">
+      <bool>false</bool>
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="le_polynom"/>
+   <item row="1" column="4">
+    <widget class="QPushButton" name="btn_correct">
+     <property name="text">
+      <string>Corriger</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -67,7 +95,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>77</x>
-     <y>68</y>
+     <y>54</y>
     </hint>
     <hint type="destinationlabel">
      <x>78</x>
@@ -82,8 +110,8 @@
    <slot>verify(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>291</x>
-     <y>68</y>
+     <x>260</x>
+     <y>55</y>
     </hint>
     <hint type="destinationlabel">
      <x>294</x>
@@ -91,8 +119,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btn_correct</sender>
+   <signal>pressed()</signal>
+   <receiver>FLine</receiver>
+   <slot>show_correct()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>324</x>
+     <y>47</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>275</x>
+     <y>87</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>verify(QString)</slot>
+  <slot>show_correct()</slot>
  </slots>
 </ui>

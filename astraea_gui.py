@@ -3,7 +3,7 @@ from enum import Enum
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QListWidgetItem
 
-from gui.lines import QLine, QFLine, QCLine,QHLine
+from gui.lines import QLine, QFLine,QHLine
 from gui.ui_main import Ui_MainWindow
 from lib.beans import *
 
@@ -44,7 +44,7 @@ class Gui(QMainWindow, Ui_MainWindow):
 
     def do_crc(self):
         title = "Encodage et Décodage de CRC"
-        enonce = "Encodez ou Décodez le CRC. Pensez à préfixer votre réponse par b, 0, 0x !\nIndiquez votre réponse sur 8 bits (b.... ....) si elle est en binaire. "
+        enonce = "Encodez ou Décodez le CRC.\n Indiquez uniquement le CRC dans la solution \nPensez à préfixer votre réponse par b, 0, 0x !\nIndiquez votre réponse sur 8 bits (b.... ....) si elle est en binaire. "
         self.select(Types.CRC, title,enonce)
 
     def do_hamming_decode(self):
@@ -174,8 +174,6 @@ class Gui(QMainWindow, Ui_MainWindow):
                 line = QFLine(bean)
             elif self.beanType == Types.HAM_DEC:
                 line = QHLine(bean)
-            elif self.beanType == Types.CRC:
-                line = QCLine(bean)
             else:
                 line = QLine(bean)
             item = QListWidgetItem(self.listWidget)

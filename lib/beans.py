@@ -235,12 +235,12 @@ class HammingMessage:
 
     @property
     def error_pos(self) -> int:
-        par = self.parity_count()
+        parity = self.parity_count()
         msg = [int(i) for i in reversed(self.bin_msg)]
-        par = np.zeros(par, dtype=int)
+        par = np.zeros(parity, dtype=int)
         syndrome = ""
         power = 0
-        while power < par:
+        while power < parity:
             for i in range(len(msg)):
                 k = i + 1  # extraction bit de parité
                 s = np.binary_repr(k)
@@ -274,10 +274,13 @@ class Crc:
 
     @property
     def solution(self) -> str:
-        div = np.binary_repr(int(clear_string(self.div), 2))
-        r = compute_crc(self.bin_msg, div)[len(self.bin_msg) + 1:]
-        v = np.base_repr(int(r, 2), self.base_dst)
-        return format_message(v, self.base_dst)
+        try:
+            div = np.binary_repr(int(clear_string(self.div), 2))
+            r = compute_crc(self.bin_msg, div)[len(self.bin_msg) + 1:]
+            v = np.base_repr(int(r, 2), self.base_dst)
+            return format_message(v, self.base_dst)
+        except IndexError:
+            return "Erreur d’Astraea"
 
     @property
     def crc(self) -> str:

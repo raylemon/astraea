@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>337</width>
-    <height>64</height>
+    <height>90</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -23,16 +23,6 @@
    <property name="sizeConstraint">
     <enum>QLayout::SetDefaultConstraint</enum>
    </property>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Énoncé</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLineEdit" name="le_statement"/>
-   </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
@@ -40,8 +30,52 @@
      </property>
     </widget>
    </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Énoncé</string>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="1">
-    <widget class="QLineEdit" name="le_solution"/>
+    <widget class="QLineEdit" name="le_solution">
+     <property name="placeholderText">
+      <string>Entrez votre solution ici</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="le_statement"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Correction</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="le_correction">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2" rowspan="3">
+    <widget class="QPushButton" name="btn_correct">
+     <property name="text">
+      <string>Corriger</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -54,8 +88,8 @@
    <slot>verify(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>155</x>
-     <y>53</y>
+     <x>220</x>
+     <y>50</y>
     </hint>
     <hint type="destinationlabel">
      <x>162</x>
@@ -63,8 +97,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btn_correct</sender>
+   <signal>clicked()</signal>
+   <receiver>Line</receiver>
+   <slot>show_correct()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>290</x>
+     <y>45</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>291</x>
+     <y>65</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>verify(QString)</slot>
+  <slot>show_correct()</slot>
  </slots>
 </ui>

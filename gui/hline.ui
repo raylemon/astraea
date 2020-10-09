@@ -7,22 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>67</height>
+    <height>83</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="3">
-    <widget class="QLineEdit" name="le_error">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-    </widget>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="le_solution"/>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label_3">
@@ -31,10 +24,10 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Énoncé</string>
+   <item row="2" column="1" colspan="2">
+    <widget class="QLineEdit" name="le_correction">
+     <property name="enabled">
+      <bool>false</bool>
      </property>
     </widget>
    </item>
@@ -45,13 +38,48 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="le_solution"/>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Énoncé</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QLineEdit" name="le_error">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
    </item>
    <item row="1" column="2">
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Erreur</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="QLineEdit" name="le_error_pos">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Correction</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="4">
+    <widget class="QPushButton" name="btn_correct">
+     <property name="text">
+      <string>Corriger</string>
      </property>
     </widget>
    </item>
@@ -66,8 +94,8 @@
    <slot>verify(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>78</x>
-     <y>49</y>
+     <x>134</x>
+     <y>50</y>
     </hint>
     <hint type="destinationlabel">
      <x>82</x>
@@ -82,7 +110,7 @@
    <slot>verify(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>279</x>
+     <x>309</x>
      <y>50</y>
     </hint>
     <hint type="destinationlabel">
@@ -91,8 +119,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btn_correct</sender>
+   <signal>pressed()</signal>
+   <receiver>HLine</receiver>
+   <slot>show_correct()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>349</x>
+     <y>41</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>354</x>
+     <y>61</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>verify(QString)</slot>
+  <slot>show_correct()</slot>
  </slots>
 </ui>
